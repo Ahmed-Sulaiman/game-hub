@@ -36,7 +36,7 @@ interface FetchGameResponse {
 
     setIsLoading(true)
     apiClinet
-    .get<FetchGameResponse>("/games", {params: {genres:selectedGenre?.id, platform: selectedPlatform?.id }, signal: controller.signal})
+    .get<FetchGameResponse>("/games", {params: {genres:selectedGenre?.id, platforms: selectedPlatform?.id }, signal: controller.signal})
       .then((res) => {
         setIsLoading(false);
         setGames(res.data.results);
