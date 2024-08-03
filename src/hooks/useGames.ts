@@ -25,7 +25,7 @@ interface FetchGameResponse {
 
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null, deps?: any[]) => {
+  const useGames = (selectedGenre: Genre | null, selectedPlatform: Platform | null, selectSortOrder: string, deps?: any[]) => {
     const [games, setGames] = useState<Game[]>([]);
     const [error, setError] = useState("");
     const [isLoading, setIsLoading] =useState(false)
@@ -36,7 +36,7 @@ interface FetchGameResponse {
 
     setIsLoading(true)
     apiClinet
-    .get<FetchGameResponse>("/games", {params: {genres:selectedGenre?.id, platforms: selectedPlatform?.id }, signal: controller.signal})
+    .get<FetchGameResponse>("/games", {params: {genres:selectedGenre?.id, platforms: selectedPlatform?.id, ordering: selectSortOrder }, signal: controller.signal})
       .then((res) => {
         setIsLoading(false);
         setGames(res.data.results);

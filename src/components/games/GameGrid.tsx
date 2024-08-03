@@ -9,13 +9,19 @@ import { Platform } from "../../hooks/usePlatform";
 interface Props {
   selectedGenre: Genre | null;
   selectedPlatform: Platform | null;
+  selectSortOrder: string;
 }
 
-const GameGrid = ({ selectedGenre, selectedPlatform }: Props) => {
+const GameGrid = ({
+  selectedGenre,
+  selectedPlatform,
+  selectSortOrder,
+}: Props) => {
   const { games, error, isLoading } = useGames(
     selectedGenre,
     selectedPlatform,
-    [selectedGenre?.id, selectedPlatform?.id]
+    selectSortOrder,
+    [selectedGenre?.id, selectedPlatform?.id, selectSortOrder]
   );
 
   const Skeleton = [
